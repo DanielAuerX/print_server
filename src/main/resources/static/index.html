@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>File Upload</title>
+    <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+<div>
+<form action="http://localhost:8080/api/v1/upload" method="post" enctype="multipart/form-data">
+    <label for="file">Choose file to upload:</label>
+    <input type="file" id="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+</div>
+</body>
+</html>
