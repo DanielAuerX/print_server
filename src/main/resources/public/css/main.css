@@ -1,0 +1,31 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.58;
+    color: #fff;
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 0 5px 0;
+    font-size: 2.2em;
+    color: #fff;
+}
+
+        a {
+                text-align: center;
+                font-size: 1em;
+            color: #fff;
+        }
+
+        a:hover {
+            color: #555;
+        }

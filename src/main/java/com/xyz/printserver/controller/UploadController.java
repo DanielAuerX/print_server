@@ -21,7 +21,7 @@ public class UploadController {
 
     public UploadController(UploadService uploadService) {
         this.uploadService = uploadService;
-        Bandwidth limit = Bandwidth.classic(1, Refill.greedy(1, Duration.ofSeconds(20)));
+        Bandwidth limit = Bandwidth.classic(1, Refill.greedy(1, Duration.ofSeconds(30)));
         this.bucket = Bucket.builder()
                 .addLimit(limit)
                 .build();
@@ -33,6 +33,6 @@ public class UploadController {
             uploadService.handleFile(file);
             return ResponseEntity.ok("Uploaded file");
         }
-        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("too many requests :(");
     }
 }

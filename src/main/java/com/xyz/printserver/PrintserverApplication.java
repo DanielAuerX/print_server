@@ -11,3 +11,11 @@ public class PrintserverApplication {
 	}
 
 }
+/*
+todo:
++ login
++ check pictures
++ error page for too many requests
++ what happens after 200 and 400/500
++ display if printer is online?
+ */
