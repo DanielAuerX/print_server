@@ -14,10 +14,17 @@
         <input type="file" id="file" name="file" accept="image/*,.pdf" required>
         <span id="file-name">no file selected</span>
         <button type="submit" class="upload-button">upload</button>
-        <p id="error-message" style="color: red; display: none;">file is too large :(</p>
     </form>
 </div>
-<div id="toast">file uploaded successfully!</div>
+<div id="confirm-print-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>upload successful!</h2>
+        <p id="modal-message">do you want to print the file?</p>
+        <button id="confirm-print-button" class="upload-button">yes, print</button>
+        <button id="cancel-button" class="upload-button">cancel</button>
+    </div>
+</div>
+<div id="toast"></div>
 <script src="js/index.js"></script>
 </body>
 </html>
