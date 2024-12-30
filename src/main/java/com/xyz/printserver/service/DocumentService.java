@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+
 @Service
 public class DocumentService {
 
@@ -29,10 +30,15 @@ public class DocumentService {
     @Value("${printserver.files.prefix}")
     private String filePrefix;
 
-    private final DocIdContainer docIdContainer;
+    @Value("${printserver.printer.name}")
+    private String printerName;
 
-    public DocumentService(DocIdContainer docIdContainer) {
+    private final DocIdContainer docIdContainer;
+    private final PrintService printService;
+
+    public DocumentService(DocIdContainer docIdContainer, PrintService printService) {
         this.docIdContainer = docIdContainer;
+        this.printService = printService;
     }
 
     public UploadResponseDto save(MultipartFile file, HttpServletRequest metaData) {
@@ -72,17 +78,23 @@ public class DocumentService {
         guardAgainstNull(docMetaData);
         guardAgainstIllegalCaller(remoteAddr, docMetaData);
         if (!printRequest.print()) {
-            File file = new File(fileDirectory + docMetaData.fileName());
-            if (file.delete()) {
-                log.info("deleted file '{}'. initiated by {}", docMetaData.fileName(), docMetaData.creatorIp());
-            } else {
-                log.warn("failed to delete file '{}'", docMetaData.fileName());
-            }
+            deleteFile(docMetaData);
             return "nothing has been printed :)";
         }
         log.info("printing doc {}", printRequest.docId());
-        // print file ...
-        return "file has been printed :)";
+        boolean printJobCreated = printService.print(printerName, fileDirectory + docMetaData.fileName());
+        deleteFile(docMetaData);
+        if (!printJobCreated) return "failed to create print job :(";
+        return "print job created :)";
+    }
+
+    private void deleteFile(DocMetaData docMetaData) {
+        File file = new File(fileDirectory + docMetaData.fileName());
+        if (file.delete()) {
+            log.info("deleted file '{}'. initiated by {}", docMetaData.fileName(), docMetaData.creatorIp());
+        } else {
+            log.warn("failed to delete file '{}'", docMetaData.fileName());
+        }
     }
 
     private void guardAgainstIllegalCaller(final String remoteAddr, final DocMetaData docMetaData) {

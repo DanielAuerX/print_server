@@ -19,7 +19,6 @@ import java.time.Duration;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin //TODO adjust
 public class DocumentController {
 
     private final Bucket bucket;

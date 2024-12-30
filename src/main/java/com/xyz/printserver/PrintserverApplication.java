@@ -15,6 +15,6 @@ public class PrintserverApplication {
 todo:
 + login
 + display if printer is online?
-+ clean up service
-+ print file
++ print file (check if printer available, aks for configurations?, print)
++ figure out max file size
  */
