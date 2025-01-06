@@ -82,7 +82,7 @@ public class DocumentService {
             return "nothing has been printed :)";
         }
         log.info("printing doc {}", printRequest.docId());
-        boolean printJobCreated = printService.print(printerName, fileDirectory + docMetaData.fileName());
+        boolean printJobCreated = printService.print(printerName, fileDirectory + docMetaData.fileName(), printRequest);
         deleteFile(docMetaData);
         if (!printJobCreated) return "failed to create print job :(";
         return "print job created :)";

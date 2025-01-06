@@ -9,7 +9,7 @@
 <h1>upload 'n print</h1>
 <h4>@enderscloud</h4>
 <div id="upload">
-    <form id="upload-form" action="http://192.168.178.104:8080/api/v1/upload" method="post" enctype="multipart/form-data">
+    <form id="upload-form" action="http://192.168.0.35:8080/api/v1/upload" method="post" enctype="multipart/form-data">
         <label for="file" class="upload-button">select file</label>
         <input type="file" id="file" name="file" accept="image/*,.pdf" required>
         <span id="file-name">no file selected</span>
@@ -19,11 +19,46 @@
 <div id="confirm-print-modal" class="modal" style="display: none;">
     <div class="modal-content">
         <h2>upload successful!</h2>
-        <p id="modal-message">do you want to print the file?</p>
-        <button id="confirm-print-button" class="upload-button">yes, print</button>
+        <p id="modal-message"></p>
+        <button id="confirm-print-button" class="upload-button">print</button>
+        <button id="change-settings-button" class="upload-button">change settings</button>
         <button id="cancel-button" class="upload-button">cancel</button>
     </div>
 </div>
+
+<div id="settings-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Print Settings</h2>
+        <form id="settings-form">
+            <label for="numberOfCopies">Number of Copies:</label>
+            <input type="number" id="numberOfCopies" name="numberOfCopies" value="1" min="1" max="10" required>
+
+            <label for="pagesPerSide">Pages Per Side:</label>
+            <select id="pagesPerSide" name="pagesPerSide">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+            </select>
+
+            <label for="printRange">Print Range:</label>
+            <select id="printRange" name="printRange">
+                <option value="ALL_PAGES">All Pages</option>
+                <option value="CUSTOM">Custom</option>
+            </select>
+
+            <div id="custom-range" style="display: none;">
+                <label for="rangeStart">Start Page:</label>
+                <input type="number" id="rangeStart" name="rangeStart" min="1">
+                <label for="rangeEnd">End Page:</label>
+                <input type="number" id="rangeEnd" name="rangeEnd" min="1">
+            </div>
+            <button type="submit" class="upload-button">Save Settings</button>
+            <button type="button" id="return-button" class="upload-button">Return</button>
+        </form>
+    </div>
+</div>
+
+
 <div id="toast"></div>
 <script src="js/index.js"></script>
 </body>

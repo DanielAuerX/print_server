@@ -13,4 +13,5 @@ class HouseKeepingServiceTest {
         HouseKeepingService houseKeepingService = new HouseKeepingService("/tmp/upload/", "print_request_");
         houseKeepingService.cleanUpFiles();
     }
+
 }
